@@ -9,6 +9,10 @@ than S, we subtract arr[i] from our sum and increment i.
 We continue doing this until our sum is <= S. If < S, then
 we increment jand start adding arr[j] and perform the same 
 check i.e. whether current sum is >= S.
+
+This program is to find the first such subarray, if there are multiple such
+subarrays. We need to remove the break statments, if we want the last such 
+subarray.
 Author:Ananya Jana
 */
 
