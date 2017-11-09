@@ -19,7 +19,7 @@ Author:Ananya Jana
 
 int main()
 {
-	int N, S, T, temp, start, end, i, j;
+	int N, S, T, temp, start, end, i, j, flag;
 	N = S = T = 0;
 	int * arr = NULL;	// dynamic array to hold the array elements
 	
@@ -29,7 +29,7 @@ int main()
 
 	for(int t = 1; t <= T; ++t){
 
-		temp = 0;
+		temp = flag = 0;
 		start = -1;	// this holds the starting index of the subarray whose sum equals S
 		end = -1;	// this holds the ending index of the subarray whose sum equals S
 		
@@ -51,6 +51,8 @@ int main()
 				if(temp == S){	// we have found the subarray whose sum is S, print the indices i+1, j+1
 					start = i + 1;
 					end = j + 1;
+					flag = 1;
+					break;
 				}
 				else if(temp > S){	// if this sum is greater than S, then we need to decrease the sum, starting from the element arr[i]
 					while((i <= j) && (temp > S)){
@@ -59,6 +61,8 @@ int main()
 					if(temp == S){
 						start = i + 1;
 						end = j + 1;
+						flag = 1;
+						break;
 					}
 					else if(i > j)
 						temp = 0;
@@ -67,8 +71,13 @@ int main()
 			
 			if(j == N)
 				break;
+			if(1 == flag)
+				break;
 		}
-		printf("%d %d\n", start, end);	//this prints the maximum sum
+		if(1 == flag)
+			printf("%d %d\n", start, end);	//this prints the indices
+		else
+			printf("%d\n", -1);
 		if(arr)
 			free(arr);
 	}
