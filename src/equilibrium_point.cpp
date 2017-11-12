@@ -1,4 +1,9 @@
-/*  Equilibrium point
+/*  Equilibrium point. 
+Logic: At the time of input we calculate the sum of all
+elements of the array. Later we iterate from the beginning
+of the array to the N-1 element to see whether the sum of 
+elements till i matches the sum of the remaining elements
+after i+1.
 Author:Ananya Jana
 */
 
@@ -41,8 +46,8 @@ int main()
 		
 		for(i = 0; i < (N - 1); ++i){
 			sum_before += arr[i];
-			sum_after = total - (arr[i+1] + sum_before);
-			if(sum_before == sum_after){
+			sum_after = total - (arr[i+1] + sum_before); 	//the i+1 th element is the equlibrium element if sum till i the element
+			if(sum_before == sum_after){			//matches the sum of remaining elements after i+1
 				eq_point = i+1+1;
 				break;
 			}
