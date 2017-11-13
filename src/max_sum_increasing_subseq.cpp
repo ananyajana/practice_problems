@@ -46,6 +46,8 @@ int main()
 		printf("%d\n", max);
 		if(arr)
 			free(arr);
+		if(max_sum_incr_subsq)
+			free(max_sum_incr_subsq);
 	}
 }
  
