@@ -1,6 +1,5 @@
 /*  Leaders in the array
-If an element is bigger than the element to its right and also 
-bigger than the last leader seen, then it is a leader
+If an element is bigger than the last leader seen, then it is a leader
 Author:Ananya Jana
 */
 
@@ -35,7 +34,7 @@ int main()
 		
 		last_leader_seen = leads[N -1] = arr[N - 1];	// the rightmost element is always a leader
 		for(i = N - 2; i >= 0; --i){	//start the search for leaders from the rightmost end of the array
-			if((arr[i] > arr[i + 1]) && (arr[i] > last_leader_seen)){	
+			if(arr[i] > last_leader_seen){	
 				leads[i] = arr[i];
 				last_leader_seen = arr[i];
 			}
