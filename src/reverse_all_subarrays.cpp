@@ -41,7 +41,8 @@ int main()
 
 		
 		//printf("\n");
-			
+		for(i = 0; i < N; ++i)
+			printf("%d ", arr[i]);	
 		printf("\n");
 		if(arr)
 			free(arr);
