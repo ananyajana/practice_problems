@@ -8,8 +8,8 @@ Author:Ananya Jana
 
 int main()
 {
-	int N, K, T, i, j;
-	N = K = T = i = j = 0;
+	int N, K, T, i, j, num, temp;
+	N = K = T = i = j = num = 0;
 	int * arr = NULL;	// dynamic array to hold the array elements
 	
 	
@@ -28,8 +28,14 @@ int main()
 		}
  		scanf("%d", &K); // scanning the size of the subarray
  		
-		for(i = 0; (i + K)<= N; ++i){	// scan every subarray of size K and search for the maximum element in it
-			
+		for(i = 0; i < N; i = i + K){	// scan every subarray of size K and revere it
+			j = (i + K - 1)> (N - 1)? (N - 1) : (i + K - 1);
+			num = (j - i + 1)/2;
+			for(int k = 0; k < num; ++k){	//swapping the elements
+				temp = arr[i + k];
+				arr[i + k] = arr[j - k];
+				arr[j - k] = temp;	
+			}
 		}
  
 
