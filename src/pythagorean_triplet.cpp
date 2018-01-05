@@ -41,7 +41,7 @@ int main()
 			scanf("%d", &arr[i]);
 			arr[i] = arr[i] * arr[i];
 		}
-		
+		sz = size = N;
 		//Soring the array using heapsort
 		heap_sort(arr);
 		
