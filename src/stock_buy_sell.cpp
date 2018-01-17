@@ -41,13 +41,21 @@ int N, K, T, i, j, start, end, start_flag, end_flag;
 			else
 				break;
 				
-			while((arr[i] < arr[i+1]) && (i <= N - 1) && (start != -1))
+			while((arr[i] < arr[i+1]) && (i < N - 1) && (start != -1))
 				++i;
 			if(i <= N - 1){
 				end = i;
 				printf("(%d %d) ", start, end);
 			}
+			/*else{
+				end = i + 1;
+				printf("(%d %d) ", start, end);
+			}*/
 		}
+		
+		if((start == -1) || (end == -1))
+			printf("No Profit");
+		
 		printf("\n");
 		
 		if(arr)
