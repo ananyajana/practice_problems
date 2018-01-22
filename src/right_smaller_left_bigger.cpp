@@ -11,9 +11,9 @@ Author:Ananya Jana
 
 int main()
 {
-	int N, K, T, i, flag, elem;
+	int N, K, T, i, flag;
 	N = K = T = i = 0;
-	long int *arr, *left_max, *right_min, min, max;	// dynamic array to hold the array elements, the highest elements to the left and right
+	long int *arr, *left_max, *right_min, elem;	// dynamic array to hold the array elements, the highest elements to the left and right
 	arr = NULL;
 	
 	
@@ -35,6 +35,7 @@ int main()
 		if(!right_min)
 			exit(1);
 		
+		//scanning the array elements one by one
 		for(i = 0; i < N; ++i)
 			scanf("%ld", &arr[i]);
 
@@ -74,7 +75,7 @@ int main()
 		}
 		
 		if(flag)
-			printf("%d\n", elem);
+			printf("%ld\n", elem);
 		else
 			printf("-1\n");
 			
