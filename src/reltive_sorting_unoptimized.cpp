@@ -1,5 +1,4 @@
-/*  Given an input stream of n integers the task is to insert integers to stream 
-and print the kth largest element in the stream at each insertion.
+/*  Sort an array according to the order defined by another array
 
 Author:Ananya Jana
 */
