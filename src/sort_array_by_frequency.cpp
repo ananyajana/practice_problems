@@ -27,32 +27,26 @@ int main()
 			//printf("%d ", num);
 			//incrementing the count of the scanned element
 			if(0 == elem_count[num])
-				++unique_count;
+				++unique_count;	// if the number is seen for the first time, increment the count of unique numbers seen till now
 			++elem_count[num];
-			if(num > max_seen)
+			
+			if(num > max_seen)	// keep track of the maximum number seen so far, as we don't want to iterate over entire elem_count array
 				max_seen = num;
 		}
-		//printf("\n");
-		//printf("unique_count = %d\n", unique_count);
-		
-		//for(i = 0; i <= max_seen; ++i)
-			//printf("elem_count[%d]: %d\n", i, elem_count[i]);
+
 		
 		//find the maximum frequency in the remaining elem_count array and print the index that many times, similar to counting sort and then put a zero
-		// in that place and comtinue until we have found out all the maximums
+		// in that place and continue until we have found out all the maximums
 		for(i = 0; i < unique_count; ++i){
 			for(j = 0; j <= max_seen; ++j){
 				if(elem_count[j] > max){
-					//printf("1.max = %d\n", max);
 					max = elem_count[j];	// saving the maximum frequency
-					//printf("2.max = %d\n", max);
-					max_index = j;		// saving the maximum frequency index
-						// clearing this element as we have already tsken this into account
+					max_index = j;		// saving the maximum frequency index		
 				}
 			}
 			for(j = 0; j < max; ++j)
 				printf("%d ", max_index);
-			elem_count[max_index] = 0;
+			elem_count[max_index] = 0;	// clearing this element as we have already taken this into account
 			max = max_index = 0;
 		}
 		printf("\n");
