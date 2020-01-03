@@ -8,13 +8,19 @@ for t in range(T):
 
 def is_rotation(s, t):
 	new_s = s
-	for i in range(len(s)):
-		#ch = s[i]
-		new_s = new_s[1:] + new_s[0]
-		print(new_s)
-		if(new_s == t):
-			print('1')
-			return
+	# rotate clockwise and check
+	new_s = new_s[2:] + new_s[0:2]
+	#print(new_s)
+	if(new_s == t):
+		print('1')
+		return
+	
+	#rotate anticlockwise and check
+	new_s = s
+	new_s = new_s[len(s) - 2:] + new_s[:len(s) - 2]
+	if(new_s == t):
+		print('1')
+		return
 	print('0')
 
 for t in range(T):
