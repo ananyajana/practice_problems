@@ -17,6 +17,16 @@ def make_palin(s):
             j -= 1
         if i >= j:
             return 0
+        else:
+            while i <= j:
+                if(s[i] != s[j]):
+                    count += 1
+                    j -= 1
+                else:
+                    i += 1
+                    j -= 1
+            
+    #print('not a palindrome')
     return count
     
 
