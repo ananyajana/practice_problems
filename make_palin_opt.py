@@ -1,3 +1,4 @@
+# recursive approach, takes long time
 # make palindromes with the minimum number of insertions
 import sys
 
