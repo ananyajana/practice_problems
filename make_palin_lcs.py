@@ -11,8 +11,8 @@ def Min(a, b):
 
 def lcs(x, y, m, n):
 	L = [[0 for i in range(m + 1)] for j in range(n + 1)]
-	for i in range(m):
-		for j in range(n):
+	for i in range(m + 1):
+		for j in range(n + 1):
 			if i == 0 or j == 0:
 				L[i][j] = 0
 			elif x[i - 1] == y[j - 1]:
