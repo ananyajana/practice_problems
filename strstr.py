@@ -20,8 +20,8 @@ def strstr(s, t):
             k += 1
         if k == len(t) - 1 and s[i] == t[k]:
             #print('before breaking:', idx)
-            break;
-    return idx
+            return idx
+    return -1
     
 
 for t in range(T):
