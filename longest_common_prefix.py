@@ -10,6 +10,7 @@ for t in range(T):
 def longest_common_prefix(s, n):
     match_idx = -1
     s1 = s[0]
+    k = 0   # to avoid unbounded local variabel reference error
     for i in range(len(s1)):
         for k in range(1, n):
             if i < len(s[k]):
