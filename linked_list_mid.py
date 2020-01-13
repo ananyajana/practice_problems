@@ -1,3 +1,5 @@
+# problems from geeksforgeeks must do coding questions
+
 T = int(input())
 st_list =[]
 N_list = []
@@ -36,13 +38,20 @@ def create_linked_list(s, n):
         new_node.next = Node(int(data_list[i]))
         new_node = new_node.next
 
-    llist.print_list()
+    #llist.print_list()
     return llist
         
+def find_mid(head):
+    slow = fast = head
+    while(fast and fast.next):
+        slow = slow.next
+        fast = fast.next.next
+
+    return slow
 
 for t in range(T):
     #s1 = input()
     s1 = st_list[t]
     n = N_list[t]
     llist = create_linked_list(s1, n)
-    #print(findMid(llist.head))
+    print(find_mid(llist.head).data)
