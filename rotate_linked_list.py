@@ -46,6 +46,13 @@ def rotate_list(head, k):
     if head is None:
         return None
 
+    n = 0
+    test = head
+    while(test):
+        test = test.next
+        n += 1
+    if n == k:
+        return head
     cur = temp = head
     while(cur and cnt < k):
         #print('here:')
@@ -71,7 +78,5 @@ for t in range(T):
     n = N_list[t]
     k = K_list[t]
     llist = create_linked_list(s1, n)
-    if k != n:
-        #print('k != n')
-        llist.head = rotate_list(llist.head, k)
+    llist.head = rotate_list(llist.head, k)
     llist.print_list()
