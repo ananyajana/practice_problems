@@ -41,8 +41,16 @@ def reverse_groups(head, k):
     
     # to hold the new head element
     new_head = None
-    # to hold the last element of the previous reversed group
+    # prev_last: to hold the last element of the last group
+    # cur_last: to hold the last element of the current group
     prev_last = cur_last = None
+    # reversing is done in three steps
+    # get the first element as the current last(would-be-last after reversing) element
+    # keep the cur_last in the prev_last for the next group
+    # reverse the current group
+    # change the current group's last pointer(cur_last) to point to next group
+    # change the previous group's last pointer to the beginning of the current group after reversing(temp)
+    # temp holds the first element of the current group, so after the first group is processed, temp is the new head
     while(cur):
         #print('here :')
         cnt = 0
