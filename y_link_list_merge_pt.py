@@ -89,9 +89,52 @@ def create_y_linked_list(nums, first, second, third):
     # of third and this is our y shaped list
     
     prev1.next = prev2.next = llist3.head
-    llist1.print_list()
-    llist2.print_list()
+    #llist1.print_list()
+    #llist2.print_list()
     #llist3.print_list()
+    
+    return llist1.head, llist2.head
+
+def find_merge_point(head_a, head_b):
+    len1 = len2 = 0
+    # find the length of the first list
+    cur = head_a
+    while(cur):
+        cur = cur.next
+        len1 += 1
+
+    # find the length of the second list
+    cur = head_b
+    while(cur):
+        cur = cur.next
+        len2 += 1
+
+    # find the absolute difference between the two lengths
+    # and in the longer list travel upto that many nodes
+    if len1 > len2:
+        diff = len1 - len2
+        cur = head_a
+        cur2 = head_b
+        small = len2
+    else:
+        diff = len2 - len1
+        cur = head_b
+        cur2 = head_a
+        small = len1
+    cnt = 0
+    while(cnt < diff):
+        cur = cur.next
+        cnt += 1
+    
+    cnt = 0
+    while(cnt < small):
+        if cur == cur2:
+            return cur.data
+        cur = cur.next
+        cur2 = cur2.next
+        cnt += 1
+
+    return -1
 
 for t in range(T):
     #s1 = input()
@@ -99,5 +142,9 @@ for t in range(T):
     x = X_list[t]
     y = Y_list[t]
     z = Z_list[t]
-    llist = create_y_linked_list(nums, x, y, z)
-    #llist.print_list()
+    llist1 = linked_list()
+    llist2 = linked_list()
+    llist1.head, llist2.head = create_y_linked_list(nums, x, y, z)
+    #llist1.print_list()
+    #llist2.print_list()
+    print(find_merge_point(llist1.head, llist2.head))
