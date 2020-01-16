@@ -7,6 +7,7 @@ X_list = []
 for t in range(T):
     N_list.append(int(input()))
     st_list.append(input())
+    X_list.append(int(input()))
 
 class Node:
     # fn to initialize the node object
@@ -72,6 +73,7 @@ def create_loop(head, x):
 		cur2 = cur2.next
 
 	cur2.next = cur
+	return head
 	
 
 for t in range(T):
@@ -80,8 +82,10 @@ for t in range(T):
     n = N_list[t]
     x = X_list[t]
     llist = create_linked_list(s1, n)
-    llist.head = create_loop(head,  x)
+    llist.head = create_loop(llist.head,  x)
     #llist.print_list()
+    cnt = 0
+    cur = llist.head
     while(cnt < 10) and cur:
         print(cur.data)
         cur = cur.next
