@@ -76,7 +76,7 @@ def create_loop(head, x):
 	return head
 	
 
-def print_list_ten_elems(head)
+def print_list_ten_elems(head):
     cnt = 0
     cur = head
     while(cnt < 10) and cur:
@@ -85,7 +85,15 @@ def print_list_ten_elems(head)
         cnt += 1
 
 def detect_loop(head):
-    
+    slow_p = head
+    fast_p = head
+    while(slow_p and fast_p and fast_p.next):
+        slow_p = slow_p.next
+        fast_p = fast_p.next.next
+        if slow_p == fast_p:
+            return 1
+    return 0
+
 
 for t in range(T):
     #s1 = input()
@@ -94,10 +102,10 @@ for t in range(T):
     x = X_list[t]
     llist = create_linked_list(s1, n)
     llist.head = create_loop(llist.head,  x)
-    print_list_ten_elems(llist.head)
+    #print_list_ten_elems(llist.head)
     #llist.print_list()
     if detect_loop(llist.head)  == 1:
-	print('True')
+        print('True')
     else:
-	print('False')
+        print('False')
 	
