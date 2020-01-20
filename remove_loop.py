@@ -50,47 +50,38 @@ def create_linked_list(s, n, x):
     #llist.print_list()
     return llist.head
 
+def remove_loop(head):
+    slow_p = head
+    fast_p = head
+    cur = None
+    while(slow_p and fast_p and fast_p.next):
+        slow_p = slow_p.next
+        fast_p = fast_p.next.next
+        if slow_p == fast_p:
+            cur = slow_p
 
-def find_merge_point(head_a, head_b):
-    len1 = len2 = 0
-    # find the length of the first list
-    cur = head_a
-    while(cur):
-        cur = cur.next
-        len1 += 1
+    # initialize a ptr to the head node
+    cur2 = head
+    # initialize a ptr to one of the nodes inside the head node
+    temp = cur
+    # move head ptr one by one to check if the loop is reached.
+    # if loop is reached then it should be reachable from temp
+    while(1):
+        # the node we are searching for is not yet found
+        # neither the starting point of temp is reached
+        # so increment ptr
+        if temp.next != cur2 or temp.next != cur:
+            temp = temp.next
 
-    # find the length of the second list
-    cur = head_b
-    while(cur):
-        cur = cur.next
-        len2 += 1
-
-    # find the absolute difference between the two lengths
-    # and in the longer list travel upto that many nodes
-    if len1 > len2:
-        diff = len1 - len2
-        cur = head_a
-        cur2 = head_b
-        small = len2
-    else:
-        diff = len2 - len1
-        cur = head_b
-        cur2 = head_a
-        small = len1
-    cnt = 0
-    while(cnt < diff):
-        cur = cur.next
-        cnt += 1
-    
-    cnt = 0
-    while(cnt < small):
-        if cur == cur2:
-            return cur.data
-        cur = cur.next
+        # if cur2 is reached then there is a loop, break the loop
+        if temp.next == cur2:
+            break
         cur2 = cur2.next
-        cnt += 1
 
-    return -1
+    # after the end of loop temp is the node pointing to the last
+    # node of the loop. So, make next of temp node as None
+    cur.next = None
+    
 
 for t in range(T):
     #s1 = input()
