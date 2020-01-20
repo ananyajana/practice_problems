@@ -123,6 +123,7 @@ def remove_loop(head):
 
     # start traversing k nodes from head and kth node
     j = 0
+    prev = None
     while j < cnt:
         j += 1
         prev = temp
