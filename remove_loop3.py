@@ -100,18 +100,24 @@ def remove_loop(head):
     cur = None
     loop_node = None
     while(slow_p and fast_p and fast_p.next):
+        print('in while')
         slow_p = slow_p.next
         fast_p = fast_p.next.next
         if slow_p == fast_p:
             loop_node = cur = slow_p
             break
 
+    if slow_p is None or fast_p is None or slow_p.next is None or fast_p is None:
+        return
+
     temp = loop_node
     cnt = 0
-    while temp.next != loop_node:
+    if temp is not None:
+        while temp.next != loop_node:
+            cnt += 1
+            temp = temp.next
         cnt += 1
-        temp = temp.next
-    print('# of nodes in the loop: ', cnt)
+    #print('# of nodes in the loop: ', cnt)
 
     # set one node to the the head of the list and another
     # pointer to the k th node in the list
@@ -122,16 +128,19 @@ def remove_loop(head):
         i += 1
 
     # start traversing k nodes from head and kth node
-    j = 0
     prev = None
-    while j < cnt:
-        j += 1
+    #print('cur data :', cur.data)
+    #print('temp data :', temp.data)
+    while cur != temp:
+        #print('cur data :', cur.data)
+        #print('temp data :', temp.data)
         prev = temp
         cur = cur.next
         temp = temp.next
 
     # prev.next points to loop node
-    prev.next = None
+    if prev is not None:
+        prev.next = None
 
     
         
