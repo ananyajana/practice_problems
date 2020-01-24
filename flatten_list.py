@@ -68,7 +68,15 @@ for t in range(T):
     print(elem_list)
 
     
-    #for i in range(n):
+    cnt = 0
+    heads = []
+    for i in range(n):
+        k = sub_list[i]
+        temp_list = ['0']*k
+        for j in range(k):
+            temp_list[j] = elem_list[cnt + j]
+        cnt += k
+        print('temp list {} is {}'.format(i, temp_list))
         
     #llist = create_linked_list(s1, n)
     #llist.print_list()
