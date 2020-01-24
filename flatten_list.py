@@ -48,6 +48,27 @@ for t in range(T):
     #s1 = input()
     sz = sz_list[t]
     n = N_list[t]
-    x = X_list[t]
-    llist = create_linked_list(s1, n)
+    x = lists[t]
+    print(n)
+    print(sz)
+    print(x)
+
+    sub_list = []
+    sub_list = sz.split()
+    print(sub_list)
+    for i in range(len(sub_list)):
+        sub_list[i] = int(sub_list[i])
+    print(sub_list)
+
+    elem_list = []
+    elem_list = x.split()
+    print(elem_list)
+    for i in range(len(elem_list)):
+        elem_list[i] = int(elem_list[i])
+    print(elem_list)
+
+    
+    #for i in range(n):
+        
+    #llist = create_linked_list(s1, n)
     #llist.print_list()
