@@ -28,8 +28,8 @@ class linked_list:
             temp = temp.bottom
 
 def create_linked_list(s, n):
-    data_list = []
-    data_list = s.split()
+    data_list = s
+    #data_list = s.split()
     #print(data_list)
     #print(s)
     llist = linked_list()
@@ -69,7 +69,7 @@ for t in range(T):
 
     
     cnt = 0
-    heads = []
+    llists = ['0']*n
     for i in range(n):
         k = sub_list[i]
         temp_list = ['0']*k
@@ -77,6 +77,11 @@ for t in range(T):
             temp_list[j] = elem_list[cnt + j]
         cnt += k
         print('temp list {} is {}'.format(i, temp_list))
+        llists[i] = create_linked_list(temp_list, k)
+
+    for i in range(n):
+        llists[i].print_list()
+        
         
     #llist = create_linked_list(s1, n)
     #llist.print_list()
