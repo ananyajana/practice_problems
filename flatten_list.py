@@ -27,6 +27,13 @@ class linked_list:
             print(temp.data)
             temp = temp.bottom
 
+    def print_list_horz(self):
+        temp = self.head
+        while(temp):
+            print(temp.data)
+            temp = temp.right
+
+
 def create_linked_list(s, n):
     data_list = s
     #data_list = s.split()
@@ -82,6 +89,9 @@ for t in range(T):
     for i in range(n):
         llists[i].print_list()
         
-        
-    #llist = create_linked_list(s1, n)
-    #llist.print_list()
+    llist = linked_list()
+    llist.head = llists[0].head
+    for i in range(n - 1):
+        llists[i].head.right = llists[i + 1].head
+
+    llist.print_list_horz()
