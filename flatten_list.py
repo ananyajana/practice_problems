@@ -11,7 +11,7 @@ for t in range(T):
 
 class Node:
     # fn to initialize the node object
-    def __init__(self, data):
+    def __init__(self, data = 0):
         self.data = data
         self.right = None
         self.bottom = None
@@ -50,29 +50,58 @@ def create_linked_list(s, n):
     #llist.print_list()
     return llist
 
+def merge(a, b):
+    result = Node()
+    # if the first list is empty, the second list is result
+    if a is None:
+        return b
+
+    # if the second list is empty, the first list is the result
+    if b is None:
+        return a
+
+    # compare the data members of head nodes of both lists
+    # and put the smaller on in result
+
+    if a.data < b.data:
+        result = a
+        result.bottom = merge(a.bottom, b)
+
+    else:
+        result = b
+        result.bottom = merge(a, b.bottom)
+
+    return result
+
+def flatten(root):
+    # base cases
+    if root is None or root.right is None:
+        return root
+
+    return merge(root, flatten(root.right))
 
 for t in range(T):
     #s1 = input()
     sz = sz_list[t]
     n = N_list[t]
     x = lists[t]
-    print(n)
-    print(sz)
-    print(x)
+    #print(n)
+    #print(sz)
+    #print(x)
 
     sub_list = []
     sub_list = sz.split()
-    print(sub_list)
+    #print(sub_list)
     for i in range(len(sub_list)):
         sub_list[i] = int(sub_list[i])
-    print(sub_list)
+    #print(sub_list)
 
     elem_list = []
     elem_list = x.split()
-    print(elem_list)
+    #print(elem_list)
     for i in range(len(elem_list)):
         elem_list[i] = int(elem_list[i])
-    print(elem_list)
+    #print(elem_list)
 
     
     cnt = 0
@@ -83,15 +112,18 @@ for t in range(T):
         for j in range(k):
             temp_list[j] = elem_list[cnt + j]
         cnt += k
-        print('temp list {} is {}'.format(i, temp_list))
+        #print('temp list {} is {}'.format(i, temp_list))
         llists[i] = create_linked_list(temp_list, k)
 
-    for i in range(n):
-        llists[i].print_list()
+    #for i in range(n):
+    #    llists[i].print_list()
         
     llist = linked_list()
     llist.head = llists[0].head
     for i in range(n - 1):
         llists[i].head.right = llists[i + 1].head
 
-    llist.print_list_horz()
+    #llist.print_list_horz()
+    new_list = linked_list()
+    new_list.head = flatten(llist.head)
+    new_list.print_list()
