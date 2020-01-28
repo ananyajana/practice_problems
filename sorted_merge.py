@@ -42,6 +42,12 @@ def create_linked_list(s, n):
     #llist.print_list()
     return llist
 
+def merge(head_a, head_b):
+    if head_a is None:
+        return head_b
+    if head_b is None:
+        return head_a
+
 for t in range(T):
     #s1 = input()
     n = N_list[t]
@@ -52,3 +58,6 @@ for t in range(T):
     llist2 = create_linked_list(l2, int(n2))
     llist1.print_list()
     llist2.print_list()
+
+    llist1.head = merge(llist1.head, llist2.head)
+    llist1.print_list()
