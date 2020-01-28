@@ -32,7 +32,7 @@ def create_linked_list(s, n):
     #print(data_list)
     #print(s)
     llist = linked_list()
-    first = Node(data_list[0])
+    first = Node(int(data_list[0]))
     llist.head = new_node = first
     #new_node = new_node.next
     for i in range(1, n):
@@ -48,6 +48,15 @@ def merge(head_a, head_b):
     if head_b is None:
         return head_a
 
+    temp1 = head_a.next
+    temp2 = head_b.next
+    if head_a.data > head_b.data:
+        head_b.next = merge(head_a, head_b.next)
+        return head_b
+    else:
+        head_a.next = merge(head_a.next, head_b)
+        return head_a
+
 for t in range(T):
     #s1 = input()
     n = N_list[t]
@@ -56,8 +65,8 @@ for t in range(T):
     l2 = list2[t]
     llist1 = create_linked_list(l1, int(n1))
     llist2 = create_linked_list(l2, int(n2))
-    llist1.print_list()
-    llist2.print_list()
+    #llist1.print_list()
+    #llist2.print_list()
 
     llist1.head = merge(llist1.head, llist2.head)
     llist1.print_list()
