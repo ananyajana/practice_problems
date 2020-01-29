@@ -41,19 +41,37 @@ def create_linked_list(s, n):
     return llist
 
 def pair_swap(head):
-    i = 0
-    temp = head
-    new_head = None
-    while(temp):
-        if temp.next is not None:
-            prev = temp
-            if new_head is None:
-                new_head = temp.next
+    i = 0
+    temp = head
+    new_head = None
+    prev_prev = None
+    while(temp):
+        if temp.next is not None:
+            # if prev exist make it prev_prev because
+            # prev will be set to current temp node
+            if prev is not None:
+                prev_prev = prev
+            # if this is not the first pair, then the
+            # last node of the previ
+            if prev_prev is not None:
+                prev_prev.next = temp.next
+            prev = temp
+            temp2 = temp.next
+            #if the new head is not set previously, set it
+            # this happens only once
+            if new_head is None:
+                new_head = temp.next
+
+            # swap the pointers to reverse the pair
             temp.next = temp.next.next
             new_head.next = temp
-
-
-
+            
+            # set the pointer to the first node of the next pair
+            temp = temp.next 
+    if new_head is not None:
+        return new_head
+    else:
+        return head
 
 for t in range(T):
     #s1 = input()
