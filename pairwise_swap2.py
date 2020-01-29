@@ -40,6 +40,7 @@ def create_linked_list(s, n):
     #llist.print_list()
     return llist
 
+# this program just swaps values and not te actual links
 def pair_swap(head):
     i = 0
     temp = head
