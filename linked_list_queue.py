@@ -15,7 +15,7 @@ class Node:
 
 class MyQueue:
     def __init__(self):
-        self.head = None
+        self.front = None
 
     # method to add an item to the queue
     def push(self, item):
