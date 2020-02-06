@@ -45,15 +45,44 @@ def sort_0_1_2(head):
     while temp.next is not None:
         temp = temp.next
     #set the last pointer to the last node of the linked list
-    last = temp
+    last = end = temp
     # the linked list is traversed, whenever '0' node is found, it is
     # appended at the beginning and whenever '2' node is found, it is
-    # appended at the end
-
+    # appended at the end. In the most basic approach we will try with
+    # a single node, but this can be tried with a series of '0' or '2'
+    # nodes as well
+    temp = head
+    while temp is not None and (temp != end):
+        # if temp.data matches '0' then append at the beginning
+        if temp.data == 0:
+	    # if this is the first node then nothing should be done,
+	    # else remove temp from current position and append at the head
+            if prev is not None:
+                prev.next = temp.next
+                temp.next = start
+                start = temp
+                temp = prev
+        if temp.data == 2:
+            # if this is the last node then nothing to be done,
+            # else append temp at the end
+            if temp.next is not None:
+                prev.next = temp.next
+                temp.next = None
+                last.next = temp
+                last = temp
+                temp = prev
+        cur = temp
+        temp = temp.next
+        if prev is None or prev.next != temp:
+            prev = cur
+    return start
 
 for t in range(T):
     #s1 = input()
     s1 = st_list[t]
     n = N_list[t]
     llist = create_linked_list(s1, n)
+    #llist.print_list()
+    llist.head = sort_0_1_2(llist.head)
+    print(' the sorted list is :')
     llist.print_list()
