@@ -41,9 +41,11 @@ def sort_0_1_2(head):
     temp = start = head
     last = prev = new_head = None
 
-	
+    cnt = 1	
     while temp.next is not None:
         temp = temp.next
+        cnt += 1
+    #print('cnt is :', cnt)
     #set the last pointer to the last node of the linked list
     last = end = temp
     # the linked list is traversed, whenever '0' node is found, it is
@@ -52,7 +54,12 @@ def sort_0_1_2(head):
     # a single node, but this can be tried with a series of '0' or '2'
     # nodes as well
     temp = head
-    while temp is not None and (temp != end):
+    flag = 0 # did not encounter special case of removing node
+    # from beginning and appending at the end
+    i = 0
+    while temp is not None and (i != cnt):
+        i += 1
+        flag = 0 # reset special case flag
         # if temp.data matches '0' then append at the beginning
         if temp.data == 0:
 	    # if this is the first node then nothing should be done,
@@ -66,15 +73,29 @@ def sort_0_1_2(head):
             # if this is the last node then nothing to be done,
             # else append temp at the end
             if temp.next is not None:
-                prev.next = temp.next
-                temp.next = None
-                last.next = temp
-                last = temp
-                temp = prev
-        cur = temp
-        temp = temp.next
-        if prev is None or prev.next != temp:
-            prev = cur
+                if prev is not None:
+                    prev.next = temp.next
+                    temp.next = None
+                    last.next = temp
+                    last = temp
+                    temp = prev
+                # the node to be removed is the first node, and prev is None
+                else:
+                    #print('here')
+                    start = temp.next
+                    #start = start.next
+                    temp.next = None
+                    last.next = temp
+                    last = temp
+                    # unlike the last case, temp is being forwarded to next node
+                    temp = start
+                    flag = 1
+        if flag != 1:
+            cur = temp
+            temp = temp.next
+            if prev is None or prev.next != temp:
+                prev = cur
+
     return start
 
 for t in range(T):
@@ -84,5 +105,5 @@ for t in range(T):
     llist = create_linked_list(s1, n)
     #llist.print_list()
     llist.head = sort_0_1_2(llist.head)
-    print(' the sorted list is :')
+    #print(' the sorted list is :')
     llist.print_list()
