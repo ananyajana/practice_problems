@@ -34,8 +34,17 @@ class stack:
             return temp.data
 
 def next_larger(s, n):
-    
+    my_stack = stack()
+    for i in range(n):
+        for j in range(i, n):
+            if s[j] > s[i]:
+                my_stack.push(s[j])
+                break 
+    print(my_stack.pop())
+    print(my_stack.pop())
+    print(my_stack.pop())
+    print(my_stack.pop())
 for t in range(T):
     s = st_list[t]
     n = N_list[t]
-    print(next_larger(s, n))
+    next_larger(s, n)
