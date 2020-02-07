@@ -37,13 +37,19 @@ def next_larger(s, n):
     #print('in next_larger')
     s = s.split()
     #my_stack = stack()
-    nl = []
+    #nl = []
+    str = None
     for i in range(n):
         flag = 0
         # check for the next larger number in the index range i+1 to n
         for j in range(i, n):
-            if s[j] > s[i]:
-                nl.append(int(s[j]))
+            #print('s[{}] {}, s[{}] {}'.format(i, s[i], j, s[j]))
+            if int(s[j]) > int(s[i]):
+                if str is None:
+                    str = s[j] + ' '
+                else:
+                    str = str + s[j] + ' '
+                #nl.append(int(s[j]))
                 #print(s[j])
                 #print('pushing {} for {}'.format(s[j], s[i]))
                 #my_stack.push(s[j])
@@ -51,11 +57,16 @@ def next_larger(s, n):
                 break
         # if the next larger number has not been found
         if flag == 0:
-            nl.append(-1)
+            if str is None:
+                str = '-1 '
+            else:
+                str = str + '-1 '
+            #nl.append(-1)
             #print(int(-1))
             #my_stack.push(-1)
             #print('pushing {} for {}'.format(-1, s[i]))
-    print(nl)
+    #print(nl)
+    print(str)
 
 
 for t in range(T):
