@@ -57,10 +57,8 @@ def qPop():
     while s1.empty() is False:
         s2.push(s1.pop())
     elem = s2.pop()
-    while s2.empty() is False:
-        s1.push(s2.pop())
-    
     return elem
+
 for t in range(T):
     s = st_list[t]
     n = N_list[t]
