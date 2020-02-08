@@ -45,20 +45,29 @@ class stack:
             return True
         else:
             return False
+
 s1 = stack()
 s2 = stack()
-
 def qPush(x):
     #code here
     s1.push(x)
 
 def qPop():
     #code here
-    while s1.empty() is False:
-        s2.push(s1.pop())
-    elem = s2.pop()
-    return elem
+    if s1.empty() is True and s2.empty() is True:
+        return -1
+    if s2.empty() is True:
+        while s1.empty() is False:
+            data = s1.top()
+            s1.pop()
+            s2.push(data)
+    elem = s2.top()
+    s2.pop()
+    #while s2.empty() is False:
+    #    data = s2.pop()
+    #    s1.push(data)
 
+    return elem
 for t in range(T):
     s = st_list[t]
     n = N_list[t]
