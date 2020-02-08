@@ -40,6 +40,12 @@ class stack:
             temp = self.front
             return temp.data
 
+    def empty(self):
+        if self.front is None:
+            return True
+        else:
+            return False
+
 def next_larger(s, n):
     s = s.split()
     my_stack = stack()
@@ -47,13 +53,23 @@ def next_larger(s, n):
     my_stack.push(s[0])
     for i in range(1, n):
         if int(s[i]) > int(my_stack.top()):
-            my_stack.pop()
-            if str is None:
-                str = s[i] + ' '
-            else:
-                str = str + s[i] + ' '
-        my_stack.push(s[i])
+            while my_stack.empty() is False and int(s[i]) > int(my_stack.top()):
+                #print('here')
+                my_stack.pop()
+                if str is None:
+                    str = s[i] + ' '
+                else:
+                    str = str + s[i] + ' '
+            my_stack.push(s[i])
+        elif int(s[i]) <= int(my_stack.top()):
+            my_stack.push(s[i])
     
+    while my_stack.empty() is False:
+        my_stack.pop()
+        if str is not None: 
+            str = str + '-1 '
+        else:
+            str = '-1 '
     print(str)
 
 
