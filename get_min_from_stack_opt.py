@@ -22,6 +22,8 @@ class stack:
 
     # method to add an item to the queue
     def push(self, item):
+        if self.min is None:
+            self.min = item
         if self.min > item:
             # set the current minimum if the current item value is less
             self.min = item
@@ -40,7 +42,13 @@ class stack:
         else:
             temp = self.front
             self.front = self.front.next
-            return temp.data
+            if temp.data < self.min:
+                data = 2 * self.min - temp.data
+                popped_data = self.min
+                self.min = data
+            else:
+                popped_data = temp.data
+            return popped_data
 
     def top(self):
         if self.front is None:
