@@ -21,6 +21,14 @@ class stack:
         self.min = None
 
     # method to add an item to the queue
+    # whenenever an item < self.min in encountered, the
+    # actual pushed element is 2*item - self.min instead of
+    # the item and self.min is set to item.
+    # it is guaranteed that 2*item  - self.min < item 
+    # so now there is a scenario where the element sitting in stack is
+    # less than self.min because the actual item has not been pushed,
+    # rather is modified version involving the previous self.min is
+    # pushed. so that the previous self.min can be retrieved
     def push(self, item):
         if self.min is None:
             self.min = item
@@ -39,6 +47,10 @@ class stack:
 
 
     # method to remove an item from the queue
+    # whenever the popped element is less than self.min we have an unusual 
+    # situation, we know the item popped is not the actual item but a modified
+    # version of it.the previous self.min
+    # is retrieved by doing 2*self.min - item and then item is set to self.min
     def pop(self):
         if self.front is None:
             return -1
