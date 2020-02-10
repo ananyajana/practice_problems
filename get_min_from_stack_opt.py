@@ -26,13 +26,16 @@ class stack:
             self.min = item
         if self.min > item:
             # set the current minimum if the current item value is less
-            self.min = item
+            temp = item
             item = 2 * item - self.min
+            self.min = temp
             #print('current self.min :', self.min)
         node = Node(item)
         if self.front is not None:
             node.next = self.front
         self.front = node
+        print('pushed :', item)
+        #print('push: min is now :', self.min)
 
 
     # method to remove an item from the queue
@@ -48,6 +51,7 @@ class stack:
                 self.min = data
             else:
                 popped_data = temp.data
+            #print('pop: min is now :', self.min)
             return popped_data
 
     def top(self):
@@ -70,19 +74,14 @@ for t in range(T):
     s = st_list[t]
     n = N_list[t]
     my_stack = stack()
-    my_stack.push(2)
-    my_stack.push(3)
     my_stack.push(5)
+    my_stack.push(3)
     my_stack.push(4)
+    my_stack.push(2)
     my_stack.push(1)
 
-    print('min in stack :', my_stack.get_min())
-    my_stack.pop()
-    print('min in stack :', my_stack.get_min())
-    my_stack.pop()
-    print('min in stack :', my_stack.get_min())
-    my_stack.pop()
-    print('min in stack :', my_stack.get_min())
-    my_stack.pop()
-    print('min in stack :', my_stack.get_min())
-    my_stack.pop()
+    print(' min in stack :', my_stack.get_min())
+    for i in range(5):
+        data = my_stack.pop()
+        print('popped data is:', data)
+        print('min in stack is :', my_stack.get_min())
