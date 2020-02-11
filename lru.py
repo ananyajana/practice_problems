@@ -40,8 +40,28 @@ class doubly_linked_queue:
             self.front.prev = None
             temp.next = None
             return temp.data
+    def print_queue(self):
+        temp = self.front
+        print('printing from the front')
+        while temp.next is not None:
+            print(temp.data)
+            temp = temp.next
+        print(temp.data)
+
+        print('printing from the back')
+        while temp.prev is not None:
+            print(temp.data)
+            temp = temp.prev
+        print(temp.data)
 
 for t in range(T):
     s = st_list[t]
     n = N_list[t]
-    next_larger(s, n)
+    my_queue = doubly_linked_queue()
+    my_queue.push(1)
+    my_queue.push(2)
+    my_queue.push(3)
+    my_queue.push(4)
+    my_queue.push(5)
+
+    my_queue.print_queue()
