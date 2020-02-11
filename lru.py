@@ -12,8 +12,9 @@ class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
+        self.prev = None
 
-class queue:
+class doubly_linked_queue:
     def __init__(self):
         self.front = None
 
@@ -27,6 +28,7 @@ class queue:
             while temp.next is not None:
                 temp = temp.next
             temp.next = node
+            node.prev = temp
 
     # method to remove an item from the queue
     def pop(self):
@@ -35,63 +37,10 @@ class queue:
         else:
             temp = self.front
             self.front = self.front.next
+            self.front.prev = None
+            temp.next = None
             return temp.data
 
-class stack:
-    def __init__(self):
-        self.front = None
-
-    # method to add an item to the queue
-    def push(self, item):
-        node = Node(item)
-        if self.front is not None:
-            node.next = self.front
-        self.front = node
-
-    # method to remove an item from the queue
-    def pop(self):
-        if self.front is None:
-            return -1
-        else:
-            temp = self.front
-            self.front = self.front.next
-            return temp.data
-
-    def top(self):
-        if self.front is None:
-            return -1
-        else:
-            temp = self.front
-            return temp.data
-
-    def empty(self):
-        if self.front is None:
-            return True
-        else:
-            return False
-
-s1 = stack()
-s2 = stack()
-def qPush(x):
-    #code here
-    s1.push(x)
-
-def qPop():
-    #code here
-    if s1.empty() is True and s2.empty() is True:
-        return -1
-    if s2.empty() is True:
-        while s1.empty() is False:
-            data = s1.top()
-            s1.pop()
-            s2.push(data)
-    elem = s2.top()
-    s2.pop()
-    #while s2.empty() is False:
-    #    data = s2.pop()
-    #    s1.push(data)
-
-    return elem
 for t in range(T):
     s = st_list[t]
     n = N_list[t]
