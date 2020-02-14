@@ -112,31 +112,42 @@ class LRUCache:
             return -1
         else:
             # if the key is not in hashmap, it's a cache miss
-            # then cache size should be checked, if cache size has
-            # not reached its max capacity, then add the element to the end
-            # of the queue, if max capacity is reached, then dequeue from the
-            # front and then enqueue
             if key not in hsmap:
-                if self.capacity >= n:
-                    rem_val = my_queue.pop()
-                    del hsmap[rem_val]
-                    cnt = self.capacity
-                    cnt = cnt - 1
-                my_queue.push(key)
-                hsmap[key] = 1
-                cnt = cnt + 1
-                self.capacity = cnt
+                return -1
             # dequeue and enqueue all elements from the queue except the key
             else:
                 while my_queue.is_empty() is False:
                     rem_val = my_queue.pop()
                     if rem_val != key:
                         my_queue.push(rem_val)
-                    my_queue.push(key)
+                my_queue.push(key)
+                return hsmap[key]
 
     def set(self, key, value):
         if self.capacity == n:
             return -1
+        # if key is not in hash map, then cache size should be checked, if cache size has
+        # not reached its max capacity, then add the element to the end
+        # of the queue, if max capacity is reached, then dequeue from the
+        # front and then enqueue
+        if key not in hsmap:
+            if self.capacity >= n:
+                rem_val = my_queue.pop()
+                del hsmap[rem_val]
+                cnt = self.capacity
+                cnt = cnt - 1
+            my_queue.push(key)
+            hsmap[key] = value
+            cnt = cnt + 1
+            self.capacity = cnt
+        else:
+            while my_queue.is_empty() is False:
+                rem_val = my_queue.pop()
+                if rem_val != key:
+                    my_queue.push(rem_val)
+            my_queue.push(key)
+            hsmap[key] = value
+            return hsmap[key]
 
 
 for t in range(T):
