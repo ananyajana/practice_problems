@@ -91,6 +91,12 @@ class doubly_ended_queue:
         else:
             print('queue empty')
 
+    def is_empty(self):
+        if self.front is None:
+            return True
+        else:
+            return False
+
 class LRUCache:
     #self.hsmap = dict()
     #self.capacity_count = 0
@@ -104,6 +110,29 @@ class LRUCache:
     def get(self, key):
         if self.head is None:
             return -1
+        else:
+            # if the key is not in hashmap, it's a cache miss
+            # then cache size should be checked, if cache size has
+            # not reached its max capacity, then add the element to the end
+            # of the queue, if max capacity is reached, then dequeue from the
+            # front and then enqueue
+            if key not in hsmap:
+                if self.capacity >= n:
+                    rem_val = my_queue.pop()
+                    del hsmap[rem_val]
+                    cnt = self.capacity
+                    cnt = cnt - 1
+                my_queue.push(key)
+                hsmap[key] = 1
+                cnt = cnt + 1
+                self.capacity = cnt
+            # dequeue and enqueue all elements from the queue except the key
+            else:
+                while my_queue.is_empty() is False:
+                    rem_val = my_queue.pop()
+                    if rem_val != key:
+                        my_queue.push(rem_val)
+                    my_queue.push(key)
 
     def set(self, key, value):
         if self.capacity == n:
@@ -114,9 +143,11 @@ for t in range(T):
     s = st_list[t]
     n = N_list[t]
 
-    #lru = LRUCache(3)
-    #print(lru.get(5))
+    lru = LRUCache(3)
+    print(lru.get(5))
 
+'''
+    # testing doubly ended queue functionality
     my_queue = doubly_ended_queue()
     my_queue.push(1)
     my_queue.push(2)
@@ -141,3 +172,4 @@ for t in range(T):
     data1 = my_queue.pop_from_end()
     print(data1)
     my_queue.print_queue()
+'''
