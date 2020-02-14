@@ -9,44 +9,37 @@ for t in range(T):
     st_list.append(input())
 
 
-def print_tour(lis):
-    n = len(lis)
-    #print(n) 
-
+def print_tour(lis,n):
+    # consider the first petrol pump as the starting point
     start = 0
-    end = n-1
-    i = 0
-    curr_petrol = 0
-    while i < n:
-        # if the petrol falls -negative at any time, start and end node
-        # needs to be changed and current petrol needs to be reset
-        curr_petrol += lis[i][0] - lis[i][1]
-        if curr_petrol < 0:
-            #print('current petrol negative')
-            start = (start + 1)%n
-            end = (end + 1)%n
-            curr_petrol = 0
-            i = i + 1
-            continue
-        while start != end:
-            #print('start', start)
-            #print('i', i)
-            k = start
-            start = (start + 1)%n
-            curr_petrol += lis[start][0] - lis[start][1]
-            # if current petrol falls negative, the current start node has to be changed
-            if curr_petrol < 0:
-                #print('current petrol negative')
-                start = (k + 1)%n
-                end = (end + 1)%n
-                curr_petrol = 0
-                i = i + 1
-                break;
-        # if the start node equals end node then a route is found and returned
-        if start == end:
-            return i 
-    return -1
+    end = 1
+    curr_petrol = lis[start][0] - lis[start][1]
 
+    # run a loop while all petrol pumps are not visited
+    # and we have reached first petrol pump again with 0 or more petrol
+    # we keep enqueueing the nodes until tour is complete or petrol
+    # falls negative, if petrol amount becomes negative we keep dequeueing
+    # until the queue is empty
+    while(end != start or curr_petrol < 0):
+        #run a loop while all petrol pumps are not visited
+        # and we have reached first petrol pump again with 0
+        # or more petrol
+        # dequeueing nodes while the current petrol is negative
+        while(curr_petrol < 0 and start != end):
+            # as the curr_petrol is negative, the start needs
+            # to be changed
+            # remove the starting petrol pump, change start
+            curr_petrol -= lis[start][0] - lis[start][1]
+            start = (start + 1)%n
+
+            # if 0 is being considered as start again, then there is no possible solution
+            if start == 0:
+                return -1
+        # add a petrol pump to the current tour
+        curr_petrol += lis[end][0] - lis[end][1]
+        end = (end + 1)%n
+
+    return start
 
 
 for t in range(T):
@@ -65,5 +58,5 @@ for t in range(T):
         arr.append([s[i], s[i + 1]])
 
     #print(arr)
-    print(print_tour(arr))
+    print(print_tour(arr, n))
         
