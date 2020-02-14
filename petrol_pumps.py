@@ -10,20 +10,43 @@ for t in range(T):
 
 
 def print_tour(lis):
-    # set the start and end indices of the queue
-    start = 0
-    end = 1
-    curr_petrol = 1
     n = len(lis)
-    # keep traversing the petrol pumps until start != end or the petrol falls negative
-    while start != end and curr_petrol > 0:
-        curr_petrol = lis[start][0] - lis[start][1]
+    #print(n) 
+
+    start = 0
+    end = n-1
+    i = 0
+    curr_petrol = 0
+    while i < n:
+        # if the petrol falls -negative at any time, start and end node
+        # needs to be changed and current petrol needs to be reset
+        curr_petrol += lis[i][0] - lis[i][1]
         if curr_petrol < 0:
+            #print('current petrol negative')
             start = (start + 1)%n
             end = (end + 1)%n
-        while start!= end and curr_petrol > 0:
+            curr_petrol = 0
+            i = i + 1
+            continue
+        while start != end:
+            #print('start', start)
+            #print('i', i)
+            k = start
+            start = (start + 1)%n
             curr_petrol += lis[start][0] - lis[start][1]
-                
+            # if current petrol falls negative, the current start node has to be changed
+            if curr_petrol < 0:
+                #print('current petrol negative')
+                start = (k + 1)%n
+                end = (end + 1)%n
+                curr_petrol = 0
+                i = i + 1
+                break;
+        # if the start node equals end node then a route is found and returned
+        if start == end:
+            return i 
+    return -1
+
 
 
 for t in range(T):
@@ -31,7 +54,7 @@ for t in range(T):
     #print(s)
     # convert the string into int 
     s = [int(s[i]) for i in range(len(s))]
-    print(s)
+    #print(s)
     n = N_list[t]
     #print(n)
     arr = []
