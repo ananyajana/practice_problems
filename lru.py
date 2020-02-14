@@ -74,19 +74,22 @@ class doubly_ended_queue:
 
 
     def print_queue(self):
-        temp = self.front
-        print('printing from the front')
-        while temp.next is not None:
+        if self.front is not None:
+            temp = self.front
+            print('printing from the front')
+            while temp.next is not None:
+                print(temp.data)
+                temp = temp.next
             print(temp.data)
-            temp = temp.next
-        print(temp.data)
 
-        temp = self.end
-        print('printing from the back')
-        while temp.prev is not None:
+            temp = self.end
+            print('printing from the back')
+            while temp.prev is not None:
+                print(temp.data)
+                temp = temp.prev
             print(temp.data)
-            temp = temp.prev
-        print(temp.data)
+        else:
+            print('queue empty')
 
 class LRUCache:
     #self.hsmap = dict()
@@ -120,7 +123,6 @@ for t in range(T):
     my_queue.push(3)
 
     my_queue.print_queue()
-
     my_queue.push_at_front(4)
     my_queue.push_at_front(5)
 
@@ -130,4 +132,12 @@ for t in range(T):
     data1 = my_queue.pop_from_end()
     print(data1)
     
+    my_queue.print_queue()
+    data1 = my_queue.pop_from_end()
+    print(data1)
+    data1 = my_queue.pop_from_end()
+    print(data1)
+    my_queue.print_queue()
+    data1 = my_queue.pop_from_end()
+    print(data1)
     my_queue.print_queue()
