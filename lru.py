@@ -82,15 +82,14 @@ class doubly_ended_queue:
                 temp = temp.next
             print(temp.data)
 
-            temp = self.end
-            print('printing from the back')
-            while temp.prev is not None:
-                print(temp.data)
-                temp = temp.prev
-            print(temp.data)
+            #temp = self.end
+            #print('printing from the back')
+            #while temp.prev is not None:
+            #    print(temp.data)
+            #    temp = temp.prev
+            #print(temp.data)
         else:
             print('queue empty')
-
     def is_empty(self):
         if self.front is None:
             return True
@@ -98,64 +97,74 @@ class doubly_ended_queue:
             return False
 
 class LRUCache:
-    #self.hsmap = dict()
-    #self.capacity_count = 0
-    #self.head = self.tail = None
-    
     def __init__(self, cap):
-        self.capacity_count = cap
+        self.capacity = cap
         self.hsmap = dict()
-        self.head = self.tail = None
+        self.my_queue = doubly_ended_queue()
 
     def get(self, key):
-        if self.head is None:
+        #print('in get')
+        #self.my_queue.print_queue()
+        #print(self.hsmap)
+        if self.my_queue.is_empty() is True:
             return -1
         else:
             # if the key is not in hashmap, it's a cache miss
-            if key not in hsmap:
+            if key not in self.hsmap:
                 return -1
             # dequeue and enqueue all elements from the queue except the key
             else:
-                while my_queue.is_empty() is False:
-                    rem_val = my_queue.pop()
+                cnt = 0
+                while cnt < self.capacity and self.my_queue.is_empty() is False:
+                    rem_val = self.my_queue.pop()
                     if rem_val != key:
-                        my_queue.push(rem_val)
-                my_queue.push(key)
-                return hsmap[key]
+                        self.my_queue.push(rem_val)
+                    cnt += 1
+                self.my_queue.push(key)
+                return self.hsmap[key]
 
     def set(self, key, value):
-        if self.capacity == n:
-            return -1
+        #print('in set')
+        #self.my_queue.print_queue()
+        #print(self.hsmap)
         # if key is not in hash map, then cache size should be checked, if cache size has
         # not reached its max capacity, then add the element to the end
         # of the queue, if max capacity is reached, then dequeue from the
         # front and then enqueue
-        if key not in hsmap:
-            if self.capacity >= n:
-                rem_val = my_queue.pop()
-                del hsmap[rem_val]
-                cnt = self.capacity
-                cnt = cnt - 1
-            my_queue.push(key)
-            hsmap[key] = value
-            cnt = cnt + 1
-            self.capacity = cnt
+        if key not in self.hsmap:
+            # if we are here, it's a new key, we need to check if current capacity is not
+            # full, then just enqueue that new key
+            # else, dequeue a value from the queue and then enqueue the new key
+            if len(self.hsmap) == self.capacity:
+                rem_val = self.my_queue.pop()
+                del self.hsmap[rem_val]
+            self.my_queue.push(key)
+            self.hsmap[key] = value
         else:
             while my_queue.is_empty() is False:
                 rem_val = my_queue.pop()
                 if rem_val != key:
-                    my_queue.push(rem_val)
-            my_queue.push(key)
-            hsmap[key] = value
-            return hsmap[key]
+                    self.my_queue.push(rem_val)
+            self.my_queue.push(key)
+            self.hsmap[key] = value
+            return self.hsmap[key]
 
 
 for t in range(T):
     s = st_list[t]
     n = N_list[t]
-
+    
+    # create an instance of the class lru cache
     lru = LRUCache(3)
-    print(lru.get(5))
+
+    #page_refs = [1, 2, 3]
+    page_refs = [1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5]
+    for i in range(len(page_refs)):
+        if lru.get(page_refs[i]) == -1:
+            print('cache miss :', page_refs[i])
+            lru.set(page_refs[i], page_refs[i]  + 10)
+        else:
+            print('cache hit :', page_refs[i])
 
 '''
     # testing doubly ended queue functionality
