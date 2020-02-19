@@ -8,7 +8,15 @@ for t in range(T):
     N_list.append(input())
     st_list.append(input())
 
-def find_max_of_subarrays(s, n)
+def find_max_of_subarrays(s, n):
+    n, k = n.split()
+    n = int(n)
+    k = int(k)
+    s = s.split()
+    s = [int(s[i]) for i in range(len(s))]
+    print(s)
+    print(n)
+    print(k)
     return -1
     
 for t in range(T):
