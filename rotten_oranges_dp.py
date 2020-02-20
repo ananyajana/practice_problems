@@ -30,7 +30,8 @@ for t in range(T):
 
 
 # function to return the minimum of four numbers
-def min(p, q, r, s):
+def min_find(p, q, r, s):
+    #print('p :{}, q :{}, r :{}, s :{}'.format(p, q, r, s))
     if (p < q):
         temp1 = p
     else:
@@ -40,21 +41,23 @@ def min(p, q, r, s):
     else:
         temp2 = s
     if (temp1 < temp2):
+        #print('{} < {}'.format(temp1, temp2))
         return temp1
     else:
+        #print('{} < {}'.format(temp2, temp1))
         return temp2
 
 
 # function to return the minimum distance to any rotten orange
 # from [i, j]
 def dist(i, j):
-    print(table)
-    
+    #print(table)
     #print('i :', i)    
     #print('j :', j)    
     # if i, j are outside the array
+    #print('mat[{}][{}]: {}'.format(i, j, mat[i][j]))
     if i >= R or i < 0 or j >= C or j < 0:
-        i#print('out of range')
+        #print('out of range')
         return INT_MAX
 
     # if result already exists in the table
@@ -63,14 +66,15 @@ def dist(i, j):
         return table[i][j]
     
     # if 0 then can't lead to any path so return INT_MAX
-    elif mat[i][j] == '0':
+    elif int(mat[i][j]) == 0:
         table[i][j] = INT_MAX
         return INT_MAX
 
     # if 2 then we have reached our rotten oranges
     # so return from here
-    elif mat[i][j] == '2':
+    elif int(mat[i][j]) == 2:
         table[i][j] = 0
+        #print('returning 0')
         return 0
 
     # if this node is already visited, then return to avoind infinite
@@ -82,12 +86,18 @@ def dist(i, j):
         # Mark the current node as visited
         visited[i][j] = 1
         temp1 = dist(i+1, j)
+        #print('i+1: {}, j :{}, temp1 :{}'.format(i+1, j, temp1))
         temp2 = dist(i-1, j)
+        #print('i-1: {}, j :{}, temp2 :{}'.format(i-1, j, temp2))
         temp3 = dist(i, j+1)
-        temp4 = dist(i, j+1)
+        #print('i: {}, j+1 :{}, temp3 :{}'.format(i, j+1, temp3))
+        #print('temp3 :{}'.format(temp3))
+        temp4 = dist(i, j-1)
+        #print('i: {}, j-1 :{}, temp4 :{}'.format(i, j-1, temp4))
+        #print('temp4 :{}'.format(temp4))
 
         # take the minimum of all
-        table[i][j] = 1 + min(temp1, temp2, temp3, temp4)
+        table[i][j] = 1 + min_find(temp1, temp2, temp3, temp4)
 
         visited[i][j] = 0
 
@@ -103,19 +113,19 @@ def rot_oranges(s):
     # orange from all the fresh oranges
     for i in range(R):
         for j in range(C):
-            if mat[i][j] == '1':
+            if int(mat[i][j]) == 1:
                 dist(i, j)
 
     # pick the maximum distance of fresh orange
     # to some rotten orange
     for i in range(R):
         for j in range(C):
-            if mat[i][j] == '1' and table[i][j] > max:
+            if int(mat[i][j]) == 1 and table[i][j] > max:
                 max = table[i][j]
 
-    print(table)
+    #print(table)
     # if all oranges can be rotten
-    print(max)
+    #print(max)
     if (max < INT_MAX):
         return max
 
@@ -142,5 +152,6 @@ for t in range(T):
     visited = [[0 for i in range(c)] for j in range(r)]
     s = s1.split()
     mat = [ s[i*c : (i+1)*c] for i in range(r)]    
+    #print(mat)
 
     print(rot_oranges(s1))
