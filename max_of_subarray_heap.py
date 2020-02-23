@@ -47,8 +47,8 @@ def find_max_of_subarrays(s, n):
     while j < n:
         # add the next element of the window
         # we are replacing the last element of
-        # the heap array, but that may not be the
-        # outgoing element?
+        # the heap array, with the
+        # outgoing element.
         heap[heap.index(last)] = nexts
         
         # heapify to get the maximum of the 
