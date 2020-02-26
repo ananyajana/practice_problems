@@ -145,6 +145,38 @@ def bottom_view(root):
     print('\n')
     
 
+def print_bottom_view_util(root, curr, hd, new_dict):
+    if root is None:
+        return
+
+    # if the node for a particular horizontal distance is not
+    # present in dictionary , then add it
+    if hd not in new_dict:
+        new_dict[hd] = [root.data, curr]
+    # compare the height with the existing node and
+    # update only if current height is greater than previsous
+    else:
+        pair = new_dict[hd]
+        if pair[1] <= curr:
+            new_dict[hd] = [root.data, curr]
+
+    # recurse into the left subtree
+    print_bottom_view_util(root.left, curr+1, hd-1, new_dict)
+
+    # recurse into the right subtree
+    print_bottom_view_util(root.right, curr+1, hd+1, new_dict)
+
+def bottom_view2(root):
+    # the map will have the horizontal distance as the key and
+    # the node' data and height tuple as value
+    new_dict = {}
+    # util to fill the map with the entries
+    print_bottom_view_util(root, 0, 0, new_dict)
+
+    for key in sorted(new_dict.keys()):
+        print('{} '.format(new_dict[key][0]), end='')
+    print('\n')
+
 
 # code execution starts here
 if __name__=='__main__':
@@ -167,4 +199,5 @@ if __name__=='__main__':
     #print('the tree after inserting the nodes :')
     #bintree.print_tree_inorder(bintree.root)
 
-    bottom_view(bintree.root)
+    #bottom_view(bintree.root)
+    bottom_view2(bintree.root)
