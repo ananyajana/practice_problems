@@ -19,7 +19,8 @@ class binary_tree:
 # recursive function to print the left view of a binary tree
 
 #arr=[20, 8, 22, 5, 3, 4, 25]
-arr=[1, 2, 3, 7, 6, 5, 4]
+#arr=[1, 2, 3, 7, 6, 5, 4]
+arr = [-9, 6, -10]
 
 # create a tree with the array from the given index
 # i.e. create a tree with the elements arr[i:n]
@@ -37,23 +38,36 @@ def create_binary_tree(i):
 def max_path_sum(root):
     _, max_sum = find_path_len(root)
     return max_sum
-
+INT_MIN = -2**32
 def find_path_len(root):
     if root is None:
         return [0, 0]
+    if root.left is None and root.right is None:
+        return [root.data, INT_MIN]
+
     left_path_len, left_max_sum = find_path_len(root.left)
     right_path_len, right_max_sum = find_path_len(root.right)
-    node_max_sum = 0
-    max_path_len = 0
-    if left_path_len >= right_path_len:
-        max_path_len = left_path_len + root.data
-    else:
+    node_max_sum = INT_MIN
+    max_path_len = INT_MIN
+
+
+    if root.left is not None and root.right is not None:
+        if left_path_len >= right_path_len:
+            max_path_len = left_path_len + root.data
+        else:
+            max_path_len = right_path_len + root.data
+        node_max_sum = left_path_len + root.data + right_path_len
+        cur_max = left_max_sum if left_max_sum > right_max_sum else right_max_sum
+        if node_max_sum < cur_max:
+            node_max_sum = cur_max
+
+    if root.left is None:
         max_path_len = right_path_len + root.data
-    node_max_sum = left_path_len + root.data + right_path_len
+        node_max_sum = root.data + right_path_len
+    elif root.right is None:
+        max_path_len = left_path_len + root.data
+        node_max_sum = left_path_len + root.data 
     #cur_max = left_max_sum > right_max_sum? left_max_sum:right_max_sum
-    cur_max = left_max_sum if left_max_sum > right_max_sum else right_max_sum
-    if node_max_sum < cur_max:
-        node_max_sum = cur_max
 
     return [max_path_len, node_max_sum]
 
