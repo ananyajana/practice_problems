@@ -4,14 +4,37 @@ import sys
 import heapq
 from collections import defaultdict
 
+root = None
 def insertHeaps(x):
+    global root
     global min_heap, max_heap
+    # having the <= sign is mandatory over here because
+    # if the sequence is something like this 21, 23, 22
+    # then root will be 22 after th insertion of 21 and 23
+    # and hence it will match the 3rd key 22
+    if root is None or x <= root:
+        heapq.heappush(min_heap, x)
+    else:
+        heapq.heappush(max_heap, -x)
+
     min_size = len(min_heap)
     max_size = len(max_heap)
-    if (min_size == max_size) or ((max_size - min_size) == 1):
-        heapq.heappush(min_heap, x)
+    if (abs(min_size - max_size) > 1):
+        balanceHeaps()
+    # after bal;ance heap the size of the heaps may change
+    min_size = len(min_heap)
+    max_size = len(max_heap)
+    if (min_size == max_size):
+        l = min_heap[0]
+        u = -max_heap[0]
+        root = float(l + u)/2
     elif (min_size - max_size) == 1:
-        heapq.heappush(max_heap, -x)
+        root = min_heap[0]
+    elif (max_size - min_size) == 1:
+        root = -max_heap[0]
+
+def balanceHeaps():
+    print('Hello')
 
 def getMedian():
     global min_heap, max_heap
