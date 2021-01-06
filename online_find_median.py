@@ -66,7 +66,8 @@ def balanceHeaps():
             max_size = len(max_heap)
 
 def getMedian():
-        return root
+    global root
+    return root
 
         
 
