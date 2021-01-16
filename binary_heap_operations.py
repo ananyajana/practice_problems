@@ -95,6 +95,8 @@ def deleteKeyi_old(i):
 
 def deleteKey(i):
     global n, arr
+    if n == 0:
+        raise ValueError('Heap is empty')
     if i >= n:
         raise ValueError('pos is greater than heap size, valid positions are 0 to n - 1')
     # exchange the node at the position i with the last node
@@ -108,6 +110,14 @@ def deleteKey(i):
     # run heapify on the node at position i if it is a non leaf node
     if isLeaf(i) is False:
         heapify(arr, n, i)
+
+def extractMin():
+    global n, arr
+    if n == 0:
+        raise ValueError('Heap is empty')
+    min_key = arr[0]
+    deleteKey(0)
+    return min_key
 
 
 def insertKey(x):
@@ -142,4 +152,8 @@ for i in range(7):
 deleteKey(4)
 print(arr)
 deleteKey(1)
+print(arr)
+print('the min elements extracted is:', extractMin())
+print(arr)
+print('the min elements extracted is:', extractMin())
 print(arr)
