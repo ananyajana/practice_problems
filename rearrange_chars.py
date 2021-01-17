@@ -47,11 +47,19 @@ for t in range(T):
         k = heapq.heappop(pq)
         str = str + k[1]
 
+        print('after popping', pq)
+
         # if frequency of previous character is less than zero that
         # means it is useless, we need not push it
         if prev[0] > 0:
+            # need to convert to list and then back convert again as tuples a re immutable
+            prev_ = list(prev)
+            prev_[0] = prev_[0] * ( -1)
+            prev = tuple(prev_)
             heapq.heappush(pq, prev)
         
+
+        print('after pushing', pq)
 
         # make the current character as the previous character and
         # decrease the frequency by one
