@@ -52,6 +52,7 @@ class linked_list:
 if __name__=='__main__':
     # start with the empty list
     k_arrs = {{1, 2, 3}, {4, 5}, {6, 7, 8}, {9, 10}}
+    k_arrs = [[1, 2, 3], [4, 5], [6, 7, 8], [9, 10]]
 
     llist1 = linked_list()
     llist1.create_linked_list(arr1)
