@@ -74,7 +74,15 @@ def sort_by_freq(a, n):
         idx = idx + freq_arr[i]
 
     print('temp_arr: ', temp_arr)
-        
+
+    '''
+    # if string version is required
+    new_str = ''
+    for i in range(n):
+        new_str += '{} '.format(temp_arr[i])
+
+    return new_str
+    ''' 
     #print('final_arr: ', final_arr)
     return temp_arr
 
