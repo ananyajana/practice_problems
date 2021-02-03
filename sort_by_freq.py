@@ -65,8 +65,18 @@ def sort_by_freq(a, n):
     #print('freq_arr: ', freq_arr)
 
     final_arr = temp_arr[:m]
+    freq_arr = freq_arr[:m]
+    # satart putting the elements back in temp_arr in the order required by the program
+    idx = 0
+    for i in range(m):
+        k = freq_arr[i]
+        temp_arr[idx:idx+k] = [final_arr[i]] * k
+        idx = idx + freq_arr[i]
+
+    print('temp_arr: ', temp_arr)
+        
     #print('final_arr: ', final_arr)
-    return final_arr
+    return temp_arr
 
 for t in range(T):
     s = st_list[t]
