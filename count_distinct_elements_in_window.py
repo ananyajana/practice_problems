@@ -5,7 +5,7 @@ T = int(input())
 
 def count_distinct(arr, n, k):
     res = []
-    for i in range(n-3):
+    for i in range(n-k):
         counts = dict()
         for j in range(k):
             if arr[i+j] not in counts.keys():
