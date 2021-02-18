@@ -1,8 +1,8 @@
 T = int(input())
 
-# find all unique quadruples from the given array that sums up to the nuique number
-# the elements need not be contiguous
-
+# the key insight is that the sum of two numbers to be divisible by k
+# the sum of the remainders(%k) of the two numbers i.e. (a+b) % k = 0
+# iff (a%k + b%k)%k =0
 def array_pair(arr, k):
     n = len(arr)
     temp = dict()
