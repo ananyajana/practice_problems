@@ -1,5 +1,8 @@
 # python pogram to find the shprtest path between a given source cell
 # to a destination cell
+
+# we cak solve this problem by using BFS as the first time we reach  destination via
+# BFS that would be the shortest path, as all path lengths are the same
 from collections import deque
 ROW = 9
 COL = 10
