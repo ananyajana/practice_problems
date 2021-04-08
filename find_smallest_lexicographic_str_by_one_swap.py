@@ -1,16 +1,12 @@
-'''
-You are given a string s of lower case english alphabets. You can choose any two characters in the string and replace all the occurences of the first character with the second character and replace all the occurences of the second character with the first character. Your aim is to find the lexicographically smallest string that can be obtained by doing this operation at most once.
-'''
-
-# the first question to answer is how to choose the two charas? will the answer
-# be non-unique? I think no, the answer should be unique..
-# will the lexicographically smallest char always be selected? I think np. e.g
-# the string acbd , the characters to be swapped are probably c and b
-# we probably need to see what characters are present in the string e.g. if we find the fist chracters is not lexicogrpahy smallest then that has to be one of
-# the characters to be reaplced?
-# the string needs to  be sroted lexicographically and then compared to the
-# original string. Whereever the first mismatch occurs in the corresponding characters, those are the characters to be swapped 
-
+#Given a string str of length N. The task is to find out the 
+# lexicographically smallest string when at most only one swap 
+# is allowed. That is, two indices 1 <= i, j <= n can be chosen 
+# and swapped. This operation can be performed at most one time.
+# string is sorted lexicogrphically and then copared to the original string
+# whenever the first mismatch occurs, those are the characters that need to be
+# replaced, remember in the origin string the bigger character is present
+# at this location of mismatch, the last occurrence of the smaller character
+# is found the original string and replaced with this bogger chara
 def find_smallest(s):
 
     # store the last occurrence of every character
