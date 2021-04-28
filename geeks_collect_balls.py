@@ -6,6 +6,25 @@
 # e.g. let's say the last part of array a is 6, 8, 9 and the last 
 # part of array b is 6, 15, then both would be optimal path and 
 # hence both are valid solutions
+
+''' the road switching happens just before the same count bucket i.e. if 
+the sequences are a = {1, 4, 5, 6, 8}, b[] = {2, 3, 4, 6, 9}, then
+the road crossing can occur at 5 in first list of 4 in second list,
+not 6 as I thought  earlier'''
+
+# at the point of possible crossover do we need to consider all these
+# sums: a_sum, b_sum+xleme; b_sum, a_sum+xelem; a_sum, b_sum?
+''' Let's say the beginning of the array as T0, the element where the
+crossoer happens as T1 and the end T2. At T1, we have four possible paths
+ - continue with a[], continue with b[], go from a[] to b[] and continue
+and go from b[] to a[] and continue
+ max{(5+6+8), (4+6+9), (5+4+6+9), (4+5+6+8)}'''
+
+''' but there is a problem with this approach, for example if the optimal
+sum between T0 and T1 is in path b[], then if optimal path frpom T1 to T2
+is go from a[] to b[] and continue, there is a conflict as it is not possible
+to be on path b[] and then suddenly choose go from a[] to b[]'''
+
 def find_max(a, b, m, n):
     # cur sum holds the current biggest sum seen so far
     # cur sum holds the current maximum number of balls that can be picked
@@ -29,18 +48,26 @@ def find_max(a, b, m, n):
         for i in range(m, n):
             b_sum += b[i]
 
+    flag = False
     for i in range(small):
         # updathe the sums(from that point to the end of the arrya)
         a_sum += a[m - i - 1]
         b_sum += b[n - i - 1]
-        # check if a cross over is possible
-        if a[m - i - 1] == b[n - i - 1]:
+        if flag is True:    # last element was a crossover element, so need to compare and take the greater sum
             # check which sum from the end is greater so far
             # assign that sum to the current biggest sum seen so far
             if a_sum > b_sum:
                 cur_sum += a_sum
             else:
                 cur_sum += b_sum
+            flag = False # since the necessry actions for a the crossover is done,
+            # we can reset the flag
+l
+
+        # check if a cross over is possible and set the flag
+        # in next iteration, the flag needs to be checked for updating current sum
+        if a[m - i - 1] == b[n - i - 1]:
+            flag = True # to signify that cross over is possible
             # thse sums are made to be 0 again because they can hold
             # the number of balls between two crossovers, not the entire arrays
             a_sum = 0
@@ -53,7 +80,7 @@ def find_max(a, b, m, n):
     if a_sum > b_sum:
         cur_sum += a_sum
     else:
-            cur_sum += b_sum
+        cur_sum += b_sum
         
     print('cur_sum is:', cur_sum) 
 
