@@ -25,6 +25,9 @@ sum between T0 and T1 is in path b[], then if optimal path frpom T1 to T2
 is go from a[] to b[] and continue, there is a conflict as it is not possible
 to be on path b[] and then suddenly choose go from a[] to b[]'''
 
+''' for every crossover we have such 4 options foe each of the already exisitng
+previous options. Hence traversing may not give the solution'''
+
 def find_max(a, b, m, n):
     # cur sum holds the current biggest sum seen so far
     # cur sum holds the current maximum number of balls that can be picked
@@ -62,8 +65,6 @@ def find_max(a, b, m, n):
                 cur_sum += b_sum
             flag = False # since the necessry actions for a the crossover is done,
             # we can reset the flag
-l
-
         # check if a cross over is possible and set the flag
         # in next iteration, the flag needs to be checked for updating current sum
         if a[m - i - 1] == b[n - i - 1]:
@@ -83,9 +84,52 @@ l
         cur_sum += b_sum
         
     print('cur_sum is:', cur_sum) 
+# https://github.com/krishnakannan/DS-Algorithms/blob/master/GeeksForGeeks/Greedy/GeekCollectBalls.java
+def find_max2(a, b, m, n):
+    path1 = 0
+    path2 = 0
+
+    i = 0
+    j = 0
+
+    while i < m and j < n:
+        if a[i] < b[j]:
+            path1 += a[i]
+            i += 1
+        elif a[i] < b[j]:
+            path2 += b[j]
+            j += 1
+        else:
+            path1 += a[i]
+            path2 += b[j]
+            if path1 > path2:
+                path2 = path1
+            else:
+                path1 = path2
+            i += 1
+            j += 1
+
+    # if te last elements are equal
+    if a[i-1] == b[j-1]:
+        if path1 > path2:
+            path2 = path1
+        else:
+            path1 = path2
+
+
+    while i < m:
+        path1 += a[i]
+        i += 1
+
+    while j < n:
+        path2 += b[j]
+        j += 1
+
+    return path1 if path1 > path2 else path2
 
 a = [1, 4, 5, 6, 8]
 b = [2, 3, 4, 6, 9]
 m = 5
 n = 5
-find_max(a, b, m, n)
+#find_max(a, b, m, n)
+print('max path: ', find_max2(a, b, m, n))
