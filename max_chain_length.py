@@ -2,6 +2,8 @@
 given the pairs. The constraint of forming the chain is that given the pairs
 (a, b), (c, d) a valid chain is (a, b), (c, d) if b < c '''
 
+import numpy as np
+
 class Pair(object):
     def __init__(self, a, b):
         self.a = a
@@ -9,6 +11,10 @@ class Pair(object):
     
     def second_ele(self):
         return self.b
+
+    def first_ele(self):
+        return self.a
+
     def pair_print(self):
         print('({}, {})'.format(self.a, self.b))
 
@@ -39,10 +45,32 @@ def max_chain_length(pair_arr, n):
     # but we will use dynamic programming to solve it this time
     # with the help of a memoization table
 
+    for i in range(1, n):
+        for j in range(i):
+            # if the current max chain length for this element is less
+            # than the max_chain length formed by including the next smaller element
+            # then update the chain length, we also need to check if the first elem of the
+            # current elem is greater the second elem of the next smaller elem
+            if max_len_arr_all[i] < max_len_arr_all[j] + 1: 
+                print('there is a chance of update')
+                f_ele = pair_arr[i].first_ele()
+                s_ele = pair_arr[j].second_ele()
+                print('f_ele:{}. s_ele:{}'.format(f_ele, s_ele))
+                if f_ele > s_ele:
+                    print('update')
+                    max_len_arr_all[i] = max_len_arr_all[j] + 1
+
+    print(max_len_arr_all)
+    max_elem = np.amax(np.array(max_len_arr_all))
+    return max_elem
+
 
 
 def second_elem(pair):
     return pair.second_ele()
+
+def first_elem(pair):
+    return pair.first_ele()
     
 pair = [Pair(5, 24) , Pair(39, 60), Pair(15, 28), Pair(27, 40), Pair(50, 90)]
 print('before sorting:')
@@ -52,3 +80,6 @@ pair.sort(key=second_elem)
 print('after sorting:')
 for i in range(len(pair)):
     pair[i].pair_print()
+
+N = len(pair)
+print(max_chain_length(pair, N))
