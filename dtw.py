@@ -1,5 +1,7 @@
 ''' implementtion of the dtw algorithm
 https://towardsdatascience.com/dynamic-time-warping-3933f25fcdd
+in this algorithm the first elements are always matched.
+But is it necessary that the first elements have to be matched?
 '''
 
 import numpy as np
