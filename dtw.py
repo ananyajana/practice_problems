@@ -2,6 +2,8 @@
 https://towardsdatascience.com/dynamic-time-warping-3933f25fcdd
 in this algorithm the first elements are always matched.
 But is it necessary that the first elements have to be matched?
+Even the last elements are also matched, but this also may not hold
+true if one of the signals is little different from the other
 '''
 
 import numpy as np
