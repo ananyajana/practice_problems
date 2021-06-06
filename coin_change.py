@@ -24,12 +24,37 @@ def count(S, m, n):
     # xclusing s[m-1]
     return count(S, m - 1, n) + count(S, m, n - S[m-1])
 
+def count_dynamic(S, m, n):
+    # we create a memoization table
+    table = [[0 for x in range(m)] for x in range(n + 1)]
+
+    # base care
+    for i in range(m):
+        table[0][i] = 1
+
+    # fill the other table entries in bottom up manner
+    for i in range(1, n+1):
+        for j in range(m):
+            # count solutions including S[j] i.e. this value
+            # can be given by the entry table[i - S[j]]as S[j]
+            # can just be added to that value to give the particular i
+            x = table[i - S[j]][j] if i - S[j] >= 0 else 0
+
+            # count the solutions excluding S[j] i.e. we still try to
+            # get the sum i but with elements exclusing S[j]
+            y = table[i][j - 1] if j >= 1 else 0
+
+            # total count
+            table[i][j] = x + y
+
+    return table[n][m-1]
 # Driver program to test above function
 arr = [1, 2, 3]
 n = 4
 
-#arr = [2, 5, 3, 6]
-#n = 10
+arr = [2, 5, 3, 6]
+n = 10
 
 m = len(arr)
 print(count(arr, m, n))
+print(count_dynamic(arr, m, n))
